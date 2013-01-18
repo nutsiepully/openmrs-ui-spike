@@ -34,8 +34,13 @@ require.config({
 
 require([
     'views/patient_list',
-    'routers/router'
-], function( PatientListView, Workspace ) {
+    'routers/router',
+    'collections/patients'
+], function( PatientListView, Workspace, patientCollection ) {
+
+    patientCollection.create( {firstName: 'Pulkit', lastName: 'Bhuwalka', 'gender': 'male', birthDate: '13 Sep', address: 'address', number: 'number' } );
+    patientCollection.create( {firstName: 'Calvin', lastName: 'Hobbes', 'gender': 'male', birthDate: '13 Sep', address: 'address', number: 'number' } );
+    patientCollection.create( {firstName: 'V', lastName: 'Vendetta', 'gender': 'male', birthDate: '13 Sep', address: 'address', number: 'number' } );
 
     new Workspace();
     Backbone.history.start();

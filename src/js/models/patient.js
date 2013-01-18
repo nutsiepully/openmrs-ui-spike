@@ -4,7 +4,30 @@ define([
     'backbone'
 ], function( _, Backbone ) {
 
-    var PatientModel = Backbone.Model.extend();
+    var Patient = Backbone.Model.extend({
 
-    return PatientModel;
+        name: function() {
+            return this.attributes.firstName + ' ' + this.attributes.lastName;
+        },
+
+        url : function() {
+            var base = 'patients';
+            if (this.isNew()) return base;
+            return base + (base.charAt(base.length - 1) == '/' ? '' : '/') + this.id;
+        }
+
+    });
+
+    /*
+     * Patient
+     *  lastName
+     *  firstname
+     *  gender
+     *  birthdate
+     *  address
+     *  EMR-ID
+     *  telephone number
+     */
+
+    return Patient;
 });

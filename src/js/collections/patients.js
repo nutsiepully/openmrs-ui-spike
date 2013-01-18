@@ -6,12 +6,14 @@ define([
     'models/patient'
 ], function( _, Backbone, Store, Patient ) {
 
-    var PatientCollection = Backbone.collection.extend({
+    var PatientCollection = Backbone.Collection.extend({
 
         model: Patient,
 
-        url: '/patients'
+        url: '/patients',
+
+        localStorage: new Store('patients')
     });
 
-    return PatientCollection;
+    return new PatientCollection();
 })
