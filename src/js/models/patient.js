@@ -14,20 +14,13 @@ define([
             var base = 'patients';
             if (this.isNew()) return base;
             return base + (base.charAt(base.length - 1) == '/' ? '' : '/') + this.id;
+        },
+
+        toJSON : function() {
+            return _.extend( {}, this.attributes, { name: this.name(), url: this.url() } );
         }
 
     });
-
-    /*
-     * Patient
-     *  lastName
-     *  firstname
-     *  gender
-     *  birthdate
-     *  address
-     *  EMR-ID
-     *  telephone number
-     */
 
     return Patient;
 });

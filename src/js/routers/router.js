@@ -21,7 +21,6 @@ define([
         },
 
         home: function() {
-
         },
 
         patientNew: function() {
@@ -29,49 +28,15 @@ define([
         },
 
         patientEdit: function( id ) {
-            var patient = new Patient( {id: id} );
-
-            patient.fetch({
-                success: function( patient, resp ) {
-                    new PatientModifyView( {model: patient} );
-                },
-                error: function() {
-                    new Error( {message: 'Could not find the patient.'} );
-                    window.location.hash = '#';
-                }
-            });
+            new PatientModifyView( {model: patientCollection.get( id )} );
         },
 
         patientShow: function( id ) {
-            var patient = patientCollection.get( id );
-
-            return new PatientShowView( {model: patient} );
-
-//            var patient = new Patient( {id: id} );
-//
-//            patient.fetch({
-//                success: function( patient, resp ) {
-//                    new PatientShowView( {model: patient} );
-//                },
-//                error: function() {
-//                    new Error( {message: 'Could not find the patient.'} );
-//                    window.location.hash = '#';
-//                }
-//            });
+            return new PatientShowView( {model: patientCollection.get( id )} );
         },
 
         patientsList: function() {
-            var patients = PatientCollection.Documents();
-
-            patients.fetch({
-                success: function() {
-                    new PatientListView( {collection: patients} );
-                },
-                error: function() {
-                    new Error({ message: "Error loading documents." });
-                    window.location.hash = '#'
-                }
-            });
+            new PatientListView( {collection: patientCollection} );
         }
 
     });

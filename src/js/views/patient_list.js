@@ -3,28 +3,30 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'views/patient_list_item'
-], function( $, _, Backbone, PatientListItemView ) {
+    'views/patient_list_item',
+    'text!templates/patient_list.html'
+], function( $, _, Backbone, PatientListItemView, patientListTemplate ) {
 
     var PatientListView = Backbone.View.extend({
 
-//        tagName: 'ul',
-//
-//        template:_.template( $('patient_list_template').html() ),
-//
-//        initialize: function() {
-//
-//
-//
-//            this.model.bind( "reset", this.render, this );
-//        },
-//
-//        render: function( eventName ) {
-//            _.each( this.model.models, function( patient ) {
-//                $(this.el).append( new PatientListItemView( {model: patient} ).render().el );
-//            }, this);
-//            return this;
-//        }
+        el: '.hero-unit',
+
+        template: _.template( patientListTemplate ),
+
+        initialize: function() {
+            this.listenTo( this.collection, 'all', this.render );
+            this.render();
+        },
+
+        render: function() {
+            this.$el.html( this.template() );
+
+            this.collection.each( function( patient ) {
+                $('#patient-list').append( new PatientListItemView( {model: patient} ).render().el );
+            });
+
+            return this;
+        }
 
     });
 

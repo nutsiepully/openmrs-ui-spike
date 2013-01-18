@@ -18,9 +18,7 @@ define([
         },
 
         render: function() {
-            patientJson = this.model.toJSON();
-            _.extend( patientJson, {name: this.model.name()} );
-            this.$el.html( this.template( patientJson ) );
+            this.$el.html( this.template( this.model.toJSON() ) );
             return this;
         }
 
